@@ -10,6 +10,7 @@ namespace TechJobsConsole
             // Create two Dictionary vars to hold info for menu and data
 
             // Top-level menu options
+
             Dictionary<string, string> actionChoices = new Dictionary<string, string>();
             actionChoices.Add("search", "Search");
             actionChoices.Add("list", "List");
@@ -63,7 +64,8 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -116,9 +118,26 @@ namespace TechJobsConsole
             return choiceKeys[choiceIdx];
         }
 
+
+        //RRR This is my code below! Our first assignment is to print out all the job listings. If a user searches for something that doesn't exist, a message should appear telling the user. For some reason, mine isn't popping up and I can't figure out why. 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            foreach(var job in someJobs)
+            {
+
+                Console.WriteLine("\n*****\n");
+
+                foreach (var value in job) {
+
+                    if(!job.ContainsValue(value.Value))
+                    {
+                        Console.WriteLine($"No search results found for '{value.Value}'.");
+                        
+                    }
+
+                    Console.WriteLine("{0}: {1}", value.Key, value.Value);
+                }
+            }
         }
     }
 }
