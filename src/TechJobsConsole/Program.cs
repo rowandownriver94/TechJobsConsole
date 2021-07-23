@@ -122,20 +122,21 @@ namespace TechJobsConsole
         //RRR This is my code below! Our first assignment is to print out all the job listings. If a user searches for something that doesn't exist, a message should appear telling the user. For some reason, mine isn't popping up and I can't figure out why. 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            foreach(var job in someJobs)
+            if(someJobs.Count == 0)
             {
+                Console.WriteLine($"No search results found.");
+            } else
+            {
+                foreach (Dictionary<string, string> job in someJobs)
+                {
 
-                Console.WriteLine("\n*****\n");
-
-                foreach (var value in job) {
-
-                    if(!job.ContainsValue(value.Value))
+                    Console.WriteLine("\n*****\n");
+ 
+                    foreach (var value in job)
                     {
-                        Console.WriteLine($"No search results found for '{value.Value}'.");
-                        
-                    }
 
-                    Console.WriteLine("{0}: {1}", value.Key, value.Value);
+                        Console.WriteLine("{0}: {1}", value.Key, value.Value);
+                    }
                 }
             }
         }

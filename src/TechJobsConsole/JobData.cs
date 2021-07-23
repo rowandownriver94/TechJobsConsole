@@ -49,7 +49,7 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -140,22 +140,27 @@ namespace TechJobsConsole
         }
 
 
-        //RRR This is my second assignment! I need to print out all the job listings if the user enters a search term under "All". My brain just died here so I didn't get too far lol
-        public static List<string> FindByValue(string value)
-        {
-            List<string> jobs = new List<string>;
-            foreach (List<string> row in AllJobs)
-            {
-                string aValue = row[value];
 
-                if (aValue.Contains(value))
+        //RRR This is my second assignment! I need to print out all the job listings if the user enters a search term under "All". My brain just died here so I didn't get too far lol
+        public static List<Dictionary<string, string>> FindByValue(string searchValue)
+        {
+           LoadData();
+
+            var jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> jobListing in AllJobs)
+            {
+                foreach(string value in jobListing.Values)
                 {
-                    jobs.Add(value);
+                    if (value.ToLower().Contains(searchValue.ToLower())) 
+                    {
+                        jobs.Add(jobListing);
+                        break;
+                    }
                 }
             }
 
             return jobs;
         }
     }
-
 }
